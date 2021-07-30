@@ -1,0 +1,178 @@
+@font-face {
+	font-family: "TUI Regular";
+	src: local("TUITypeLt_LATN_W_Rg"), url(../assets/fonts/TUITypeLt_LATN_W_Rg.woff) format("woff"),
+		url(../assets/fonts/TUITypeLt_LATN_W_Rg.ttf) format("ttf");
+}
+
+@font-face {
+	font-family: "TUI Bold";
+	src: local("TUITypeLt_LATN_W_Bd"), url(../assets/fonts/TUITypeLt_LATN_W_Bd.woff) format("woff"),
+		url(../assets/fonts/TUITypeLt_LATN_W_Bd.ttf) format("ttf");
+}
+
+:root {
+	--light-blue: #e2f3fe;
+	--dark-blue: #092a5e;
+	--red: #d40e14;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	vertical-align: baseline;
+	background: transparent;
+	box-sizing: border-box;
+}
+
+html {
+	position: absolute;
+	width: 100%;
+}
+
+html,
+body {
+	color: var(--dark-blue);
+	font-family: "TUI Regular", Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	margin: 0;
+	padding: 0;
+}
+
+#page {
+	padding: 1rem;
+}
+
+h3 {
+	margin: 8px 0;
+}
+
+p {
+	margin: 8px 0;
+}
+
+button {
+	background-color: var(--dark-blue);
+	border: none;
+	box-shadow: inset 0 -1px 0 0 rgb(0 0 0 / 20%);
+	box-sizing: border-box;
+	color: #fff;
+	cursor: pointer;
+	font-family: "TUI Regular", Arial, sans-serif;
+	outline: none;
+	padding: 8px 24px;
+	padding: 0.5rem 1.5rem;
+	text-transform: uppercase;
+}
+
+button[type="submit"] {
+	margin-top: 0.5rem;
+}
+
+button:hover {
+	background-color: #071f46;
+}
+
+img {
+	max-width: 100%;
+}
+
+form {
+	color: var(--dark-blue);
+	margin-top: 1rem;
+}
+
+.form-group {
+	display: flex;
+	margin-bottom: 16px;
+}
+
+.form-group .input-container {
+	border-radius: 4px;
+	display: flex;
+	flex-basis: 25%;
+	flex-direction: column;
+	min-width: 320px;
+}
+
+label {
+	font-weight: bold;
+}
+
+.input-container > input,
+.input-container > textarea {
+	background: #fff;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-radius: 4px;
+	box-shadow: inset 0 -1px 0 0 rgb(0 0 0 / 20%);
+	box-sizing: border-box;
+	font-family: "TUI Regular", Arial, Helvetica, sans-serif;
+	min-height: 42px;
+	margin-top: auto;
+	padding: 4px 8px;
+}
+
+@media screen and (max-width: 759px) {
+	.form-group {
+		flex-direction: column;
+		margin-bottom: 0;
+	}
+
+	.form-group .input-container {
+		flex-basis: 100%;
+		margin-bottom: 16px;
+	}
+}
+
+input:focus-visible,
+textarea:focus-visible {
+	border: 1px solid #70cbf4;
+	box-shadow: 0 0 5px 0 #70cbf4;
+	outline: none;
+}
+
+label,
+small {
+	margin-bottom: 8px;
+}
+
+.btn-delete {
+	background-color: var(--red);
+}
+
+.btn-delete:hover {
+	background-color: #bb0c12;
+}
+
+.message__error {
+	color: var(--red);
+}
+
+.Toastify .Toastify__toast {
+	font-family: "TUI Regular", Arial, Helvetica, sans-serif;
+	font-weight: bold;
+}
+
+.Toastify .Toastify__toast--success {
+	background-color: #aad700;
+	color: #092a5e;
+}
+
+.Toastify .Toastify__toast .Toastify__close-button {
+	height: 0;
+	min-width: 0;
+	opacity: 1;
+}
+
+.Toastify .Toastify__toast .Toastify__close-button:hover {
+	background-color: transparent;
+}
+
+.Toastify .Toastify__toast--success .Toastify__close-button svg {
+	fill: #092a5e;
+}
+
+.Toastify .Toastify__toast--error {
+	background-color: var(--red);
+}
