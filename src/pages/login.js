@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
+import router, { useRouter } from "next/router";
 import { isValidEmail } from "../helpers";
 
-// import { userContext } from "../../../context/userContext";
+import { UserContext } from "../context/UserContext";
 
 // import { isEmptyObject } from "../../../helpers";
 
 const LoginPage = () => {
 	const [loginDetails, setLoginDetails] = useState({ email: "", password: "" });
 	const [errorMsg, setErrorMsg] = useState("");
-	const [user, setUser] = useState();
+	const { user, setUser } = useContext(UserContext);
 
 	const onChangeHandler = (e) => {
 		setErrorMsg("");
@@ -29,7 +30,13 @@ const LoginPage = () => {
 		const res = await axios.post("/api/auth/login", { email, password });
 		const data = res.data;
 
-		console.log(data);
+		if (data.error) {
+			setErrorMsg(data.message);
+			return;
+		}
+
+		setUser(data.user);
+		router.push("/");
 	};
 
 	return (
@@ -51,7 +58,7 @@ const LoginPage = () => {
 				<div>
 					<button type="submit">Submit</button>
 				</div>
-				{errorMsg && <p className="message message__error">Invalid email address</p>}
+				{errorMsg && <p className="message message__error">{errorMsg}</p>}
 			</form>
 			<br />
 			Forgotten your password? <a href="/login/reset">Reset your password here</a>

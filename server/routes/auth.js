@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
 router.post("/login", (req, res, next) => {
 	passport.authenticate("login-user", function (err, user, info) {
 		if (err) {
-			return res.status(400).json({ errors: err });
+			return res.status(400).json({ error: true, message: err });
 		} else if (!user) {
 			return res.status(200).json({ error: true, message: info.message });
 		} else if (info.newUser) {
@@ -40,11 +40,11 @@ router.post("/register", (req, res, next) => {
 		}
 
 		if (info.invalidEmail) {
-			return res.status(200).json({ error: "Invalid email, must be a valid TUI Group email" });
+			return res.status(200).json({ error: true, message: "Invalid email, must be a valid TUI Group email" });
 		}
 
 		if (info.userExists) {
-			return res.status(200).json({ error: "User already exists, please sign in" });
+			return res.status(200).json({ error: true, message: "User already exists, please sign in" });
 		}
 
 		if (info.newUser) {
@@ -63,7 +63,23 @@ router.post("/register", (req, res, next) => {
 });
 
 router.get("/current_user", (req, res) => {
-	res.send({ user: req.user });
+	if (req.user) {
+		res.send({
+			user: {
+				email: req.user.email,
+				email_is_verified: req.user.email_is_verified,
+				permissions: req.user.permissions,
+			},
+		});
+	} else {
+		res.send({
+			user: {
+				email: "",
+				email_is_verified: "",
+				permissions: "",
+			},
+		});
+	}
 });
 
 router.get("/logout", (req, res) => {

@@ -1,0 +1,32 @@
+.navbar {
+	align-items: center;
+	display: flex;
+	background-color: #70cbf4;
+	justify-content: space-between;
+	padding: 1rem;
+}
+
+.navbar p {
+	font-size: 1.25rem;
+	font-weight: bold;
+}
+
+.navbar ul {
+	align-items: center;
+	display: flex;
+	list-style: none;
+}
+
+.navbar ul li {
+	margin-left: 0.5rem;
+}
+
+.navbar ul li:first-child {
+	margin-left: 0;
+}
+
+@media screen and (max-width: 759px) {
+	.navbar {
+		flex-direction: column;
+	}
+}

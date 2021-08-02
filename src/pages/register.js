@@ -1,21 +1,13 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-// import { Redirect } from "react-router";
 import { isValidEmail } from "../helpers";
 
-import { userContext } from "../context/userContext";
-
-// import { userContext } from "../../../context/userContext";
-
-// import { isEmptyObject } from "../../../helpers";
+import { UserContext } from "../context/UserContext";
 
 const RegisterPage = () => {
 	const [loginDetails, setLoginDetails] = useState({ email: "", password: "" });
 	const [errorMsg, setErrorMsg] = useState("");
-	// const [user, setUser] = useState();
-	const user = useContext(userContext);
-
-	console.log(user);
+	const { user, setUser } = useContext(UserContext);
 
 	const onChangeHandler = (e) => {
 		setErrorMsg("");
@@ -31,8 +23,12 @@ const RegisterPage = () => {
 			const res = await axios.post("/api/auth/register", { email, password });
 			const data = res.data;
 
-			setUser(data.user);
+			if (data.error) {
+				setErrorMsg(data.message);
+				return;
+			}
 
+			setUser(data.user);
 			console.log(res);
 		} catch (error) {
 			setErrorMsg(`Sorry there has been a server error: "${error.message}".  Please try again later`);
