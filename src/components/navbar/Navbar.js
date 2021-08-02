@@ -49,21 +49,19 @@ const Navbar = () => {
 		const key = linkDetails.path.replace(/\//gi, "") + "Link";
 		return (
 			<li key={key}>
-				<Link href={linkDetails.path}>{linkDetails.text}</Link>
+				<Link href={linkDetails.path}>
+					<a>{linkDetails.text}</a>
+				</Link>
 			</li>
 		);
 	};
 
-	// useEffect(() => {
-	// 	if (!isEmptyObject(user)) {
-	// 		setUserState(user);
-	// 	}
-	// }, [user]);
-
 	return (
 		<nav className={styles.navbar}>
 			<p>
-				<a href="/home">Optimisation Wiki</a>
+				<Link href="/home">
+					<a href="/home">Optimisation Wiki</a>
+				</Link>
 			</p>
 			{user && (
 				<div style={{ marginRight: "auto", marginLeft: "1rem" }}>

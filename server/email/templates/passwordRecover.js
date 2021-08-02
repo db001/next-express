@@ -15,7 +15,7 @@ const destinationEmail = process.env.DESTINATIONEMAIL;
 const ses = new AWS.SES({ apiVersion: "2010-12-01" });
 
 const createPasswordReset = (email, resetString, from) => {
-	const resetLink = `http://localhost:3000/login/reset/code?${resetString}`;
+	const resetLink = `http://localhost:3000/login/reset/code?resetcode=${resetString}`;
 
 	const params = {
 		Destination: {

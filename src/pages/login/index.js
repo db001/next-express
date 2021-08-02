@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import router, { useRouter } from "next/router";
-import { isValidEmail } from "../helpers";
+import { isValidEmail } from "../../helpers";
 
-import { UserContext } from "../context/UserContext";
+import { UserContext } from "../../context/UserContext";
 
 // import { isEmptyObject } from "../../../helpers";
 
@@ -23,20 +23,23 @@ const LoginPage = () => {
 		const { email, password } = loginDetails;
 
 		if (!isValidEmail(email)) {
-			setErrorMsg("Email address is not valid");
+			setErrorMsg("Email address is not valid, must be a valid TUI Group email");
 			return;
 		}
 
-		const res = await axios.post("/api/auth/login", { email, password });
-		const data = res.data;
+		try {
+			const res = await axios.post("/api/auth/login", { email, password });
+			const data = res.data;
 
-		if (data.error) {
-			setErrorMsg(data.message);
-			return;
+			if (data.error) {
+				setErrorMsg(data.message);
+				return;
+			}
+			setUser(data.user);
+			router.push("/");
+		} catch (error) {
+			setErrorMsg(`Sorry there has been a server error: "${error.message}".  Please try again later`);
 		}
-
-		setUser(data.user);
-		router.push("/");
 	};
 
 	return (

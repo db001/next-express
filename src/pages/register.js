@@ -19,6 +19,11 @@ const RegisterPage = () => {
 		e.preventDefault();
 		const { email, password } = loginDetails;
 
+		if (!isValidEmail(email)) {
+			setErrorMsg("Email address is not valid, must be a valid TUI Group email");
+			return;
+		}
+
 		try {
 			const res = await axios.post("/api/auth/register", { email, password });
 			const data = res.data;
@@ -27,9 +32,7 @@ const RegisterPage = () => {
 				setErrorMsg(data.message);
 				return;
 			}
-
 			setUser(data.user);
-			console.log(res);
 		} catch (error) {
 			setErrorMsg(`Sorry there has been a server error: "${error.message}".  Please try again later`);
 		}

@@ -39,6 +39,7 @@ router.post("/", (req, res) => {
 
 router.post("/check", (req, res) => {
 	const d = new Date();
+	console.log(req.body);
 	User.findOne({
 		resetPasswordToken: req.body.resetToken,
 		resetPasswordExpires: {
