@@ -15,7 +15,7 @@ const destinationEmail = process.env.DESTINATIONEMAIL;
 const ses = new AWS.SES({ apiVersion: "2010-12-01" });
 
 const createVerifyEmail = (email, verify_string, from) => {
-	const verifyLink = `http://localhost:3000/verify/code/?${verify_string}`;
+	const verifyLink = `http://localhost:3000/verify/code/?verifycode=${verify_string}`;
 
 	const params = {
 		Destination: {
