@@ -1,7 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
-import router, { useRouter } from "next/router";
-import { isValidEmail } from "../../helpers";
+import { useRouter } from "next/router";
+import { isValidEmail, isEmptyObject } from "../../helpers";
 
 import { UserContext } from "../../context/UserContext";
 
@@ -11,6 +11,7 @@ const LoginPage = () => {
 	const [loginDetails, setLoginDetails] = useState({ email: "", password: "" });
 	const [errorMsg, setErrorMsg] = useState("");
 	const { user, setUser } = useContext(UserContext);
+	const router = useRouter();
 
 	const onChangeHandler = (e) => {
 		setErrorMsg("");
@@ -41,6 +42,13 @@ const LoginPage = () => {
 			setErrorMsg(`Sorry there has been a server error: "${error.message}".  Please try again later`);
 		}
 	};
+
+	useEffect(() => {
+		console.log(user);
+		if (!isEmptyObject(user) && user?.email !== "") {
+			router.push("/home");
+		}
+	}, [user]);
 
 	return (
 		<>
