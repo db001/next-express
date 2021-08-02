@@ -17,7 +17,7 @@ const VerifyUser = () => {
 	const verifyUser = async () => {
 		const verifyString = getQueryString();
 		setVerificationCode(verifyString);
-		if (!verifyString) {
+		if (!verificationCode) {
 			setCodeExists(false);
 		}
 		const response = await axios.get(`/user/verify/code/${verifyString}`);
