@@ -73,11 +73,7 @@ router.get("/current_user", (req, res) => {
 		});
 	} else {
 		res.send({
-			user: {
-				email: "",
-				email_is_verified: "",
-				permissions: "",
-			},
+			user: {},
 		});
 	}
 });

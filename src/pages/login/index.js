@@ -44,7 +44,6 @@ const LoginPage = () => {
 	};
 
 	useEffect(() => {
-		console.log(user);
 		if (!isEmptyObject(user) && user?.email !== "") {
 			router.push("/home");
 		}
